@@ -27,7 +27,7 @@
 
           <button
             class="btn btn-primary btn-danger"
-            @click="logInSMS()">
+            @click="login()">
               LOGIN SMS
           </button>
 
@@ -36,9 +36,7 @@
     </nav>
 
     <div class="container">
-      <router-view 
-        :auth="auth" 
-        :authenticated="authenticated">
+      <router-view :auth="auth" :authenticated="authenticated">
       </router-view>
     </div>
   </div>
@@ -46,9 +44,10 @@
 
 <script>
 
-import AuthService from './auth/AuthService'
-import Auth0LockPasswordless from 'auth0-lock-passwordless'
-const auth = new AuthService()
+// import AuthService from './auth/AuthService'
+import AuthServiceSMS from './auth/AuthServiceSMS'
+const auth = new AuthServiceSMS()
+// const {login} = auth
 const { login, logout, authenticated, authNotifier } = auth
 
 export default {
@@ -64,52 +63,7 @@ export default {
   },
   methods: {
     login,
-    logout,
-    logInSMS () {
-      var self = this
-      var clientID = '81K1H3XaFCwBl8vY6dTpFmot7IAVtqEY'
-      var domain = 'hispanoclub.auth0.com'
-//       var lock = new Auth0LockPasswordless(clientID, domain)
-      // lock.sms(function (error, profile, id_token) {
-      //   console.log('le error', error)
-      //   console.log('le error', id_token)
-      //   // This will be invoked when the user enters the one-time password he or she
-      //   // received via text message. Here we just welcome the user, but usually you
-      //   // want save the profile and id_token, and handle errors.
-      //   if (!error) {
-      //     alert('Hi' + profile.name)
-      //   }
-      // })
-
-      var options = {
-        'responseType': 'token',
-        'autoclose': true,
-        'focusInput': false,
-        'popup': false,
-        'socialBigButtons': true,
-        'connections': [
-          'facebook',
-          'twitter'
-        ]
-      }
-
-      var lock = new Auth0LockPasswordless(clientID, domain)
-
-      lock.socialOrSms(options, function (error, profile, id_token) {
-        /* callbacks vary depending on how you use the lock
-         * you can find more information on the lock's README
-         * https://github.com/auth0/lock-passwordless#api
-         */
-        console.log('le error', error)
-        console.log('le error', id_token)
-      //   // This will be invoked when the user enters the one-time password he or she
-      //   // received via text message. Here we just welcome the user, but usually you
-      //   // want save the profile and id_token, and handle errors.
-        if (!error) {
-          alert('Hi' + profile.name)
-        }
-      })
-    }
+    logout
   }
 }
 </script>
