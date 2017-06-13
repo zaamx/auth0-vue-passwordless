@@ -15,9 +15,12 @@
   },
   "dependencies": {
     "EventEmitter": "^1.0.0",
-    "auth0-js": "^8.7.0",
+    "auth0": "^2.6.0",
     "auth0-lock-passwordless": "^2.2.3",
     "bootstrap": "^3.3.7",
+    "fs": "0.0.1-security",
+    "net": "^1.0.2",
+    "tls": "0.0.1",
     "vue": "^2.2.1",
     "vue-resource": "^1.2.1",
     "vue-router": "^2.2.0"
